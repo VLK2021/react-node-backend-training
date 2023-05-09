@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import express from 'express';
 import {createConnection} from 'typeorm';
 import 'dotenv/config';
+import cors from 'cors';
 
 import {config} from "./config";
 import {apiRouter} from "./routes";
@@ -18,6 +19,8 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
 });
+
+app.use(cors());
 
 app.use(apiRouter);
 
