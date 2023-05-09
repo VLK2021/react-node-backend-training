@@ -9,6 +9,11 @@ class UserController {
         const users = await userService.getUsers();
         return res.json(users);
     }
+
+    public async createUser(req: Request, res:Response): Promise<Response<IUser>> {
+        const createUser = userService.createdUser(req.body);
+        return res.json(createUser);
+    }
 }
 
 export const userController = new UserController();
