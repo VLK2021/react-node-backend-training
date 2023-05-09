@@ -11,7 +11,7 @@ class UserController {
     }
 
     public async createUser(req: Request, res:Response): Promise<Response<IUser>> {
-        const createUser = userService.createdUser(req.body);
+        const createUser = await userService.createdUser(req.body);
         return res.json(createUser);
     }
 }

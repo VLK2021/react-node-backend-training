@@ -11,16 +11,15 @@ class UserService {
 
     public async createdUser(user: IUser): Promise<IUser> {
         const {password} = user;
-        const hashPassword = await this._hashPassword(password);
+        const hashPassword = await UserService._hashPassword(password);
         const dataToSave = {...user, password: hashPassword};
         return userRepository.createUser(dataToSave);
     }
 
-
-
-    private async _hashPassword(password: string): Promise<string> {
-        return await bcrypt.hash(password, 10);
+    private static async _hashPassword(password: string): Promise<string> {
+        return bcrypt.hash(password, 10);
     }
+
 }
 
 export const userService = new UserService();
