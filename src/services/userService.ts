@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 
 import {IUser} from "../entity";
 import {userRepository} from "../repositories";
+import {UpdateResult} from "typeorm";
 
 
 class UserService {
@@ -14,6 +15,10 @@ class UserService {
         const hashPassword = await UserService._hashPassword(password);
         const dataToSave = {...user, password: hashPassword};
         return userRepository.createUser(dataToSave);
+    }
+
+    public async deleteUser(id: number): Promise<UpdateResult> {
+        return userRepository.deleteUser(id);
     }
 
     private static async _hashPassword(password: string): Promise<string> {
