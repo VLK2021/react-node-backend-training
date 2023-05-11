@@ -21,6 +21,10 @@ class UserRepository extends Repository<User> implements IUserRepository {
     public async deleteUser(id: number) {
         return getManager().getRepository(User).softDelete({ id });
     }
+
+    public async updateUser(id: number, email: string, password: string, city: string) {
+        return getManager().getRepository(User).update({id}, {email, password, city});
+    }
 }
 
 export const userRepository = new UserRepository();

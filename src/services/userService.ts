@@ -21,6 +21,11 @@ class UserService {
         return userRepository.deleteUser(id);
     }
 
+    public async updateUser(id: number, email: string, password: string, city: string): Promise<UpdateResult> {
+        const hashPassword = await UserService._hashPassword(password);
+        return userRepository.updateUser(id, email, hashPassword, city);
+    }
+
     private static async _hashPassword(password: string): Promise<string> {
         return bcrypt.hash(password, 10);
     }
